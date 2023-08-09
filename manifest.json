@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Eisenhower Matrix",
+  "version": "1.0",
+  "description": "A basic todo list extension.",
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "icons": {
+    "48": "icon.png"
+  },
+  "manifest_version": 2
+}
