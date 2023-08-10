@@ -46,15 +46,27 @@ input[type="text"] {
   border-radius: 4px;
 }
 
-button {
+textarea {
+  width: calc(600px - 12%);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+#addTask {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #193ce6;
   border: none;
   border-radius: 4px;
   color: white;
   cursor: pointer;
+}
+
+button {
+  background-color: #193ce6;
 }
 
 button:hover {
@@ -88,18 +100,40 @@ input[type="checkbox"] {
   outline: none;
 }
 
-input[type="checkbox"]:checked {
+.urgent:hover {
+  background-color: #aeded0;
+  border-color: #aeded0;
+}
+
+.urgent:checked {
+  background-color: #22dda8;
+  border-color: #22dda8;
+}
+
+.important:hover {
+  background-color: #b2bae1;
+  border-color: #b2bae1;
+}
+
+.important:checked {
   background-color: #193ce6;
   border-color: #193ce6;
 }
 
-input[type="checkbox"]:hover {
-  background-color: #ccc;
-}
+/* input[type="checkbox"]:checked {
+  background-color: #193ce6;
+  border-color: #193ce6;
+} */
 
-input[type="checkbox"]:checked:hover {
-  background-color: #022ad1;
-}
+/* input[type="checkbox"]:hover {
+  background-color: #ccc;
+} */
+
+/* input[type="checkbox"]:checked:hover {
+  background-color: #ccc;
+  border-color: #ccc;
+  transition: 0.4s;
+} */
 
 button.delete {
   width: 30px; /* Set the width to create a square button */

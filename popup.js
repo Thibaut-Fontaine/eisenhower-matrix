@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("taskInput");
+  const optionInput = document.getElementById("optionInput");
   const addTaskButton = document.getElementById("addTask");
   const taskList = document.getElementById("taskList");
 
@@ -37,23 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const actions = {
     toggleProperty: (index, property) => tasks[index][property] = !tasks[index][property],
     removeTask: (index) => tasks.splice(index, 1),
+    addTask: (task) => {
+      const newTask = task.trim();
+      if (newTask === "") return ;
+      tasks.push({ task: newTask, important: false, urgent: false });
+    }
   }
 
   addTaskButton.addEventListener("click", () => {
-    const newTask = taskInput.value.trim();
-    if (newTask === "") {
-      return
-    }
-    tasks.push({ task: newTask, important: false, urgent: false });
-    taskInput.value = "";
-    saveTasks();
-    renderTasks();
-  });
-
-  taskInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      addTaskButton.click();
-    }
+    taskInput.value.split('\n')
+      .map(v => v.startsWith(optionInput.value) ? v.substring(optionInput.value.length) : null)
+      .filter(v => v)
+      .forEach(v => call("addTask", v))
+    taskInput.value = ""
+    optionInput.value = ""
   });
 
   renderTasks();
