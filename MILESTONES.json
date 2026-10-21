@@ -87,35 +87,40 @@
       "todos": [
         {
           "text": "Run the full test suite, formatter and linter",
-          "done": false
+          "done": true
         },
         {
           "text": "Write README usage notes",
-          "done": false
+          "done": true
         },
         {
           "text": "Commit everything and push",
-          "done": false
+          "done": true
         },
         {
           "text": "Build responsive 2x2 grid UI, drag-and-drop, keyboard path, no innerHTML",
-          "done": false
+          "done": true
         },
         {
           "text": "Build standalone web app and bring the extension to parity",
-          "done": false
+          "done": true
         },
         {
           "text": "Deploy to VPS behind nginx and finish README/STATUS/CHECKS",
+          "done": true
+        },
+        {
+          "text": "Apply the deployment on the VPS (human action: the commands are in deploy/README.md and CHECKS.md)",
           "done": false
         }
       ],
       "complexity": "low",
       "algorithmic_complexity": "",
       "estimate_secs": 1200,
-      "status": "pending",
+      "status": "done",
+      "finished_at": "2026-10-21T12:14:56.952700236Z",
       "actual_secs": 0,
-      "note": ""
+      "note": "UI, web app, extension parity, docs and the deployment files are done: 127 node:test specs green, the browser smoke test green, README/STATUS/CHECKS written; the site is applied by the owner with the commands in deploy/README.md"
     }
   ],
   "events": [
@@ -268,6 +273,54 @@
       "milestone": "m2",
       "kind": "done",
       "note": "Parser, store, versioned persistence with legacy migration, and JSON/CSV interchange implemented; 68 node:test specs green"
+    },
+    {
+      "at": "2026-10-21T12:14:52.194319973Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #1 done: Run the full test suite, formatter and linter"
+    },
+    {
+      "at": "2026-10-21T12:14:52.214832910Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #2 done: Write README usage notes"
+    },
+    {
+      "at": "2026-10-21T12:14:52.232979548Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #3 done: Commit everything and push"
+    },
+    {
+      "at": "2026-10-21T12:14:52.249101727Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #4 done: Build responsive 2x2 grid UI, drag-and-drop, keyboard path, no innerHTML"
+    },
+    {
+      "at": "2026-10-21T12:14:52.265910264Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #5 done: Build standalone web app and bring the extension to parity"
+    },
+    {
+      "at": "2026-10-21T12:14:52.285109917Z",
+      "milestone": "m3",
+      "kind": "todo-added",
+      "note": "Apply the deployment on the VPS (human action: the commands are in deploy/README.md and CHECKS.md)"
+    },
+    {
+      "at": "2026-10-21T12:14:56.945849923Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #6 done: Deploy to VPS behind nginx and finish README/STATUS/CHECKS"
+    },
+    {
+      "at": "2026-10-21T12:14:56.952700236Z",
+      "milestone": "m3",
+      "kind": "done",
+      "note": "UI, web app, extension parity, docs and the deployment files are done: 127 node:test specs green, the browser smoke test green, README/STATUS/CHECKS written; the site is applied by the owner with the commands in deploy/README.md"
     }
   ],
   "prior_factor": 1.0
