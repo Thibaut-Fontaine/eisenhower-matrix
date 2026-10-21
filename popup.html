@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
   <title>Eisenhower Matrix</title>
-  <link rel="stylesheet" type="text/css" href="popup.css">
+  <link rel="stylesheet" href="app.css">
   <link rel="icon" type="image/png" href="icon.png">
 </head>
-<body>
-  <a href="matrix.html" target="_blank">View Tasks Matrix</a>
-  <div class="container">
-    <div>
-      <textarea id="taskInput" placeholder="Enter one or more tasks (newline separated)"></textarea>
-      <input type="text" id="optionInput" placeholder="Get only lines starting with... and do not add it"></input>
-    </div>
-    <button id="addTask">Add Task</button>
-    <ul id="taskList">
-      <!-- Task items will be dynamically added here -->
-    </ul>
-  </div>
-  <script src="popup.js"></script>
+<body class="extension-popup">
+  <main id="app" class="page" data-compact="true"></main>
+
+  <script src="core/quadrants.js"></script>
+  <script src="core/task.js"></script>
+  <script src="core/parser.js"></script>
+  <script src="core/store.js"></script>
+  <script src="core/persistence.js"></script>
+  <script src="core/interchange.js"></script>
+  <script src="core/render.js"></script>
+  <script src="core/drag.js"></script>
+  <script src="core/keyboard.js"></script>
+  <script src="core/app.js"></script>
+  <script src="boot.js"></script>
 </body>
 </html>

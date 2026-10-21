@@ -44,7 +44,9 @@
     item.setAttribute('data-task-id', String(opts.id));
     item.setAttribute('tabindex', '0');
     item.setAttribute('role', 'listitem');
-    item.setAttribute('aria-grabbed', 'false');
+    var grabbed = current.grabbedId !== undefined && current.grabbedId !== null &&
+      String(current.grabbedId) === String(opts.id);
+    item.setAttribute('aria-grabbed', grabbed ? 'true' : 'false');
 
     var checkbox = doc.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
@@ -245,10 +247,13 @@
     item.setAttribute('data-task-id', fresh.getAttribute('data-task-id'));
     item.setAttribute('aria-grabbed', fresh.getAttribute('aria-grabbed'));
     item.className = fresh.className;
-    var old = item.childNodes.slice();
-    for (var j = 0; j < old.length; j++) item.removeChild(old[j]);
-    var children = fresh.childNodes.slice();
-    for (var i = 0; i < children.length; i++) item.appendChild(children[i]);
+    // A child list is not an array in a browser: it is copied by hand.
+    var old = [];
+    for (var j = 0; j < item.childNodes.length; j++) old.push(item.childNodes[j]);
+    for (var k = 0; k < old.length; k++) item.removeChild(old[k]);
+    var children = [];
+    for (var i = 0; i < fresh.childNodes.length; i++) children.push(fresh.childNodes[i]);
+    for (var m = 0; m < children.length; m++) item.appendChild(children[m]);
     return item;
   }
 

@@ -21,9 +21,9 @@
   var KEYBOARD_HELP = [
     { keys: 'Tab', action: 'Move the focus to the next task' },
     { keys: 'Space', action: 'Pick a task up, or drop the task you carry' },
+    { keys: 'Enter', action: 'Pick a task up, or drop the task you carry' },
     { keys: 'Arrow keys', action: 'Move the task you carry' },
     { keys: 'Escape', action: 'Cancel the move' },
-    { keys: 'Enter', action: 'Edit the task' },
     { keys: 'Delete', action: 'Delete the task' }
   ];
 

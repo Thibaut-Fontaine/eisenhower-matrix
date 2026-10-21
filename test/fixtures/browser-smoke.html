@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Eisenhower Matrix — browser smoke test</title>
+</head>
+<body>
+  <!--
+    A smoke test that runs the real application in a real browser. It writes
+    the result of every check in the body of the page, so the page can be
+    read with a headless browser:
+
+      google-chrome --headless --dump-dom test/fixtures/browser-smoke.html
+
+    Every line starts with PASS or FAIL.
+  -->
+  <pre id="results">running</pre>
+  <div id="app"></div>
+
+  <script src="../../core/quadrants.js"></script>
+  <script src="../../core/task.js"></script>
+  <script src="../../core/parser.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/persistence.js"></script>
+  <script src="../../core/interchange.js"></script>
+  <script src="../../core/render.js"></script>
+  <script src="../../core/drag.js"></script>
+  <script src="../../core/keyboard.js"></script>
+  <script src="../../core/app.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      var lines = [];
+
+      function check(name, condition) {
+        lines.push((condition ? 'PASS ' : 'FAIL ') + name);
+      }
+
+      function memoryStorage() {
+        var data = {};
+        return {
+          getItem: function (key) { return Object.prototype.hasOwnProperty.call(data, key) ? data[key] : null; },
+          setItem: function (key, value) { data[key] = String(value); },
+          removeItem: function (key) { delete data[key]; },
+          clear: function () { data = {}; },
+          get length() { return Object.keys(data).length; }
+        };
+      }
+
+      function key(node, name) {
+        return new KeyboardEvent('keydown', { key: name, bubbles: true, cancelable: true });
+      }
+
+      try {
+        var storage = memoryStorage();
+        var app = Eisenhower.app.createApp({
+          document: document,
+          storage: storage,
+          mount: document.getElementById('app'),
+          options: { defaultQuadrant: 'not-important-not-urgent' }
+        });
+
+        check('the matrix has four quadrants', document.querySelectorAll('.quadrant').length === 4);
+        check('the add form exists', document.querySelector('.add-form') !== null);
+
+        app.addTask('buy milk', 'important-urgent');
+        app.addTask('call the bank', 'not-important-urgent');
+        check('two tasks are stored', app.store.all().length === 2);
+        check('the task is in the matrix', document.querySelectorAll('.task').length === 2);
+        check('the count is shown', document.querySelector('[data-quadrant="important-urgent"] .quadrant-count').textContent === '1');
+
+        var item = document.querySelector('[data-task-id="' + app.store.all()[0].id + '"]');
+        item.focus();
+        item.dispatchEvent(key(item, ' '));
+        check('the task is picked up', item.getAttribute('aria-grabbed') === 'true');
+        item.dispatchEvent(key(item, 'ArrowRight'));
+        item.dispatchEvent(key(item, ' '));
+        check('the task moved to the other quadrant', app.store.all()[0].quadrant === 'important-not-urgent');
+
+        var taskId = app.store.all()[0].id;
+        app.store.setCompleted(taskId, true);
+        check('the completed task is in the completed list', document.querySelectorAll('.completed-list .task').length === 1);
+
+        var stored = JSON.parse(storage.getItem('eisenhower.matrix.tasks'));
+        check('the tasks are saved in the browser', stored.version === 2 && stored.tasks.length === 2);
+
+        var csv = app.exportText('csv');
+        check('the CSV export holds the text', csv.indexOf('buy milk') !== -1);
+        var imported = Eisenhower.interchange.importCsv(csv);
+        check('the CSV import restores the text', imported.length === 2);
+
+        var parsed = Eisenhower.parser.parsePaste('- [x] one\n* two\n3. three');
+        check('the parser strips the markers', parsed.length === 3 && parsed[0].text === 'one' && parsed[0].completed === true);
+
+        check('no markup is inserted', document.querySelectorAll('.task-text img').length === 0);
+      } catch (error) {
+        lines.push('FAIL exception: ' + (error && error.message ? error.message : String(error)));
+      }
+
+      document.getElementById('results').textContent = lines.join('\n');
+    })();
+  </script>
+</body>
+</html>

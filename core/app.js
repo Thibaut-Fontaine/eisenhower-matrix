@@ -51,7 +51,7 @@
    * Build the toolbar of the application: the add form, the paste panel, the
    * import and export actions and the live region.
    */
-  function createToolbar(doc, options) {
+  function createToolbar(doc, options, compact) {
     var toolbar = element(doc, 'div', 'app-toolbar');
 
     var form = element(doc, 'form', 'add-form');
@@ -70,6 +70,14 @@
     form.appendChild(select);
     form.appendChild(submit);
     toolbar.appendChild(form);
+
+    if (compact) {
+      var open = element(doc, 'a', 'open-full', 'Open the full matrix');
+      open.setAttribute('href', 'matrix.html');
+      open.setAttribute('target', '_blank');
+      toolbar.appendChild(open);
+      return toolbar;
+    }
 
     var actions = element(doc, 'div', 'app-actions');
 
@@ -143,6 +151,25 @@
   }
 
   /**
+   * The list of the keyboard shortcuts, shown at the bottom of the page.
+   */
+  function createKeyboardHelp(doc) {
+    var details = element(doc, 'details', 'keyboard-help');
+    var summary = element(doc, 'summary', 'keyboard-help-summary', 'Keyboard shortcuts');
+    details.appendChild(summary);
+    var list = element(doc, 'dl', 'keyboard-help-list');
+    for (var i = 0; i < keyboard.KEYBOARD_HELP.length; i++) {
+      var entry = keyboard.KEYBOARD_HELP[i];
+      var term = element(doc, 'dt', 'keyboard-help-keys', entry.keys);
+      var definition = element(doc, 'dd', 'keyboard-help-action', entry.action);
+      list.appendChild(term);
+      list.appendChild(definition);
+    }
+    details.appendChild(list);
+    return details;
+  }
+
+  /**
    * The application.
    */
   function createApp(config) {
@@ -171,14 +198,15 @@
     status.setAttribute('aria-live', 'polite');
 
     var view = compact ? render.createCompactView(doc) : render.createMatrixView(doc);
-    var toolbar = compact ? null : createToolbar(doc, options);
+    var toolbar = createToolbar(doc, options, compact);
     var paste = compact ? null : createPastePanel(doc);
 
     var app = element(doc, 'div', 'app' + (compact ? ' app-compact' : ''));
-    if (toolbar) app.appendChild(toolbar);
+    app.appendChild(toolbar);
     if (paste) app.appendChild(paste.panel);
     app.appendChild(view.root);
     app.appendChild(status);
+    if (!compact) app.appendChild(createKeyboardHelp(doc));
     mount.appendChild(app);
 
     function announce(message) {
@@ -465,22 +493,30 @@
       if (action === 'grab') {
         if (session.isGrabbed()) {
           var drop = session.drop();
+          state.grabbedId = null;
           if (drop) {
             applyMove(drop);
             announce('The task was moved.');
           }
+          refresh();
         } else {
           var task = store.get(taskId);
           if (!task) return;
           var index = store.list(task.quadrant).map(function (candidate) { return candidate.id; }).indexOf(taskId);
           session.grab(taskId, task.quadrant, index);
+          state.grabbedId = taskId;
+          refresh();
           announce(session.announcement(task.text));
         }
         return;
       }
 
       if (action === 'cancel') {
-        if (session.cancel()) announce('The move was cancelled.');
+        if (session.cancel()) {
+          state.grabbedId = null;
+          refresh();
+          announce('The move was cancelled.');
+        }
         return;
       }
 
@@ -561,6 +597,7 @@
         pointerId: event.pointerId
       });
       state.dragged = taskId;
+      state.grabbedId = taskId;
       if (event.target.setPointerCapture && event.pointerId !== undefined) {
         try { event.target.setPointerCapture(event.pointerId); } catch (error) { /* not supported */ }
       }
@@ -582,6 +619,7 @@
       if (!dragState.active) return;
       var move = drag.endDrag(dragState);
       state.dragged = null;
+      state.grabbedId = null;
       if (move) {
         applyMove(move);
         announce('The task was moved.');

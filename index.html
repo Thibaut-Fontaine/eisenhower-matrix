@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eisenhower Matrix</title>
+  <meta name="description" content="A small and private task matrix: the four Eisenhower quadrants, drag and drop, keyboard operation, import and export. The tasks stay in the browser.">
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="icon.png">
+</head>
+<body>
+  <a class="skip-link" href="#matrix">Skip to the matrix</a>
+  <header class="page-header">
+    <h1>Eisenhower Matrix</h1>
+    <p class="page-tagline">Sort what needs to be done. Everything stays in this browser.</p>
+  </header>
+  <main id="app" class="page"></main>
+  <footer class="page-footer">
+    <p>No account, no server, no tracking. The tasks live in the local storage of this browser.</p>
+  </footer>
+
+  <script src="core/quadrants.js"></script>
+  <script src="core/task.js"></script>
+  <script src="core/parser.js"></script>
+  <script src="core/store.js"></script>
+  <script src="core/persistence.js"></script>
+  <script src="core/interchange.js"></script>
+  <script src="core/render.js"></script>
+  <script src="core/drag.js"></script>
+  <script src="core/keyboard.js"></script>
+  <script src="core/app.js"></script>
+  <script src="boot.js"></script>
+</body>
+</html>
