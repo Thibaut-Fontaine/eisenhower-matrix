@@ -73,15 +73,24 @@ NGINX_SITE=$(find_nginx_site) || {
 }
 log "the nginx site is $NGINX_SITE"
 if ! sudo grep -q "location /eisenhower/" "$NGINX_SITE"; then
-  sudo cp -a "$NGINX_SITE" "$NGINX_SITE.bak-$(date -u +%Y%m%dT%H%M%SZ)"
-  sudo tee -a "$NGINX_SITE" < "$(dirname "$0")/nginx-eisenhower.conf" > /dev/null
+  backup="$NGINX_SITE.bak-$(date -u +%Y%m%dT%H%M%SZ)"
+  sudo cp -a "$NGINX_SITE" "$backup"
+  sudo cp "$(dirname "$0")/nginx-eisenhower.conf" /tmp/nginx-eisenhower.conf
+  sudo sed -i '/^[[:space:]]*index index.html;/r /tmp/nginx-eisenhower.conf' "$NGINX_SITE"
   log "the location was added, the previous file is kept as a backup"
 else
   log "the location is already there, nothing is changed"
 fi
 
 log "checking the nginx configuration"
-sudo nginx -t
+if ! sudo nginx -t; then
+  if [ -n "${backup:-}" ]; then
+    log "nginx test failed, restoring $backup"
+    sudo cp -a "$backup" "$NGINX_SITE"
+    sudo nginx -t
+  fi
+  exit 1
+fi
 
 log "reloading nginx"
 sudo systemctl reload nginx
