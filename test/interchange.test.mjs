@@ -85,3 +85,37 @@ test('imports an empty CSV into an empty list', () => {
 test('imports an empty JSON task list', () => {
   assert.deepEqual(importJson(JSON.stringify({ version: 1, tasks: [] })), []);
 });
+
+test('drops the invalid tasks of an imported JSON payload', () => {
+  const payload = JSON.stringify({
+    version: 1,
+    tasks: [
+      { id: 'a', text: 'buy milk', quadrant: 'important-urgent', completed: false, order: 0 },
+      { id: 'b', text: '   ', quadrant: 'important-urgent', completed: false, order: 1 },
+      { id: 'c', text: 'ok', quadrant: 'nope', completed: false, order: 2 },
+      'not a task'
+    ]
+  });
+  const imported = importJson(payload);
+  assert.equal(imported.length, 1);
+  assert.equal(imported[0].text, 'buy milk');
+});
+
+test('round trips a text with a newline through JSON', () => {
+  const tricky = [
+    { id: 'a', text: 'two\nlines', quadrant: 'important-urgent', completed: false, order: 0 },
+    { id: 'b', text: 'with, comma and "quotes"', quadrant: 'important-urgent', completed: false, order: 1 }
+  ];
+  const imported = importJson(exportJson(tricky));
+  assert.deepEqual(imported.map((t) => t.text), tricky.map((t) => t.text));
+});
+
+test('keeps 500 tasks through a CSV round trip', () => {
+  const many = [];
+  for (let i = 0; i < 500; i++) {
+    many.push({ id: `id-${i}`, text: `task, ${i} "quoted"`, quadrant: 'important-urgent', completed: i % 2 === 0, order: i });
+  }
+  const imported = importCsv(exportCsv(many));
+  assert.equal(imported.length, 500);
+  assert.deepEqual(imported.map((t) => t.text), many.map((t) => t.text));
+});

@@ -10,32 +10,33 @@
       "todos": [
         {
           "text": "Write failing unit tests for the core behaviour",
-          "done": false
+          "done": true
         },
         {
           "text": "Set up the project structure and dependencies",
-          "done": false
+          "done": true
         },
         {
           "text": "Write failing node:test specs: paste parser, task store, persistence",
-          "done": false
+          "done": true
         },
         {
           "text": "Create shared core folder layout, task model skeleton, package.json test script",
-          "done": false
+          "done": true
         },
         {
           "text": "Confirm no runtime dependency and no build step",
-          "done": false
+          "done": true
         }
       ],
       "complexity": "medium",
       "algorithmic_complexity": "",
       "estimate_secs": 1800,
-      "status": "in-progress",
+      "status": "done",
       "started_at": "2026-10-21T11:33:58.677166369Z",
-      "actual_secs": 0,
-      "note": ""
+      "finished_at": "2026-10-21T12:01:30.327917310Z",
+      "actual_secs": 1651,
+      "note": "Shared core skeleton, package.json test script, gitignore; 63 node:test specs green (npm run check)"
     },
     {
       "id": "m2",
@@ -44,39 +45,40 @@
       "todos": [
         {
           "text": "Implement the core behaviour",
-          "done": false
+          "done": true
         },
         {
           "text": "Handle errors and edge cases",
-          "done": false
+          "done": true
         },
         {
           "text": "Write/adjust unit tests for the behaviour",
-          "done": false
+          "done": true
         },
         {
           "text": "Implement paste parser with per-line quadrant preview",
-          "done": false
+          "done": true
         },
         {
           "text": "Implement task store: add, edit, delete, move, reorder, complete",
-          "done": false
+          "done": true
         },
         {
           "text": "Implement versioned persistence + one-time legacy migration with fail-safe",
-          "done": false
+          "done": true
         },
         {
           "text": "Implement JSON and CSV import/export with round-trip test",
-          "done": false
+          "done": true
         }
       ],
       "complexity": "high",
       "algorithmic_complexity": "",
       "estimate_secs": 3600,
-      "status": "pending",
+      "status": "done",
+      "finished_at": "2026-10-21T12:01:52.899857539Z",
       "actual_secs": 0,
-      "note": ""
+      "note": "Parser, store, versioned persistence with legacy migration, and JSON/CSV interchange implemented; 68 node:test specs green"
     },
     {
       "id": "m3",
@@ -182,6 +184,90 @@
       "milestone": "m3",
       "kind": "todo-added",
       "note": "Deploy to VPS behind nginx and finish README/STATUS/CHECKS"
+    },
+    {
+      "at": "2026-10-21T12:01:30.292501574Z",
+      "milestone": "m1",
+      "kind": "todo",
+      "note": "todo #1 done: Write failing unit tests for the core behaviour"
+    },
+    {
+      "at": "2026-10-21T12:01:30.298612189Z",
+      "milestone": "m1",
+      "kind": "todo",
+      "note": "todo #2 done: Set up the project structure and dependencies"
+    },
+    {
+      "at": "2026-10-21T12:01:30.305519237Z",
+      "milestone": "m1",
+      "kind": "todo",
+      "note": "todo #3 done: Write failing node:test specs: paste parser, task store, persistence"
+    },
+    {
+      "at": "2026-10-21T12:01:30.313112113Z",
+      "milestone": "m1",
+      "kind": "todo",
+      "note": "todo #4 done: Create shared core folder layout, task model skeleton, package.json test script"
+    },
+    {
+      "at": "2026-10-21T12:01:30.320482741Z",
+      "milestone": "m1",
+      "kind": "todo",
+      "note": "todo #5 done: Confirm no runtime dependency and no build step"
+    },
+    {
+      "at": "2026-10-21T12:01:30.327917310Z",
+      "milestone": "m1",
+      "kind": "done",
+      "note": "Shared core skeleton, package.json test script, gitignore; 63 node:test specs green (npm run check)"
+    },
+    {
+      "at": "2026-10-21T12:01:52.849279847Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #1 done: Implement the core behaviour"
+    },
+    {
+      "at": "2026-10-21T12:01:52.855246592Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #2 done: Handle errors and edge cases"
+    },
+    {
+      "at": "2026-10-21T12:01:52.867898389Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #3 done: Write/adjust unit tests for the behaviour"
+    },
+    {
+      "at": "2026-10-21T12:01:52.873430318Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #4 done: Implement paste parser with per-line quadrant preview"
+    },
+    {
+      "at": "2026-10-21T12:01:52.879688389Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #5 done: Implement task store: add, edit, delete, move, reorder, complete"
+    },
+    {
+      "at": "2026-10-21T12:01:52.884144830Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #6 done: Implement versioned persistence + one-time legacy migration with fail-safe"
+    },
+    {
+      "at": "2026-10-21T12:01:52.888978579Z",
+      "milestone": "m2",
+      "kind": "todo",
+      "note": "todo #7 done: Implement JSON and CSV import/export with round-trip test"
+    },
+    {
+      "at": "2026-10-21T12:01:52.899857539Z",
+      "milestone": "m2",
+      "kind": "done",
+      "note": "Parser, store, versioned persistence with legacy migration, and JSON/CSV interchange implemented; 68 node:test specs green"
     }
   ],
   "prior_factor": 1.0

@@ -182,3 +182,27 @@ test('serialises the tasks back to plain objects', () => {
   const json = JSON.parse(JSON.stringify(s.all()));
   assert.deepEqual(Object.keys(json[0]).sort(), ['completed', 'id', 'order', 'quadrant', 'text']);
 });
+
+test('reorders 500 tasks in a reasonable time', () => {
+  const s = makeStore();
+  const ids = [];
+  for (let i = 0; i < 500; i++) {
+    ids.push(s.add(`task ${i}`, { quadrant: 'important-urgent' }).id);
+  }
+  const wanted = ids.slice().reverse();
+  const started = Date.now();
+  s.reorder('important-urgent', wanted);
+  const elapsed = Date.now() - started;
+  assert.deepEqual(s.list('important-urgent').map((t) => t.text), wanted.map((id) => s.get(id).text));
+  assert.ok(elapsed < 1000, `reorder took ${elapsed}ms`);
+});
+
+test('keeps the order of the untouched tasks when a reorder is partial', () => {
+  const s = makeStore();
+  const a = s.add('a', { quadrant: 'important-urgent' });
+  const b = s.add('b', { quadrant: 'important-urgent' });
+  const c = s.add('c', { quadrant: 'important-urgent' });
+  s.reorder('important-urgent', [c.id]);
+  assert.deepEqual(s.list('important-urgent').map((t) => t.text), ['c', 'a', 'b']);
+  assert.deepEqual(s.list('important-urgent').map((t) => t.order), [0, 1, 2]);
+});
