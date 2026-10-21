@@ -111,7 +111,7 @@
         },
         {
           "text": "Apply the deployment on the VPS (human action: the commands are in deploy/README.md and CHECKS.md)",
-          "done": false
+          "done": true
         }
       ],
       "complexity": "low",
@@ -321,6 +321,12 @@
       "milestone": "m3",
       "kind": "done",
       "note": "UI, web app, extension parity, docs and the deployment files are done: 127 node:test specs green, the browser smoke test green, README/STATUS/CHECKS written; the site is applied by the owner with the commands in deploy/README.md"
+    },
+    {
+      "at": "2026-10-21T12:50:03.394185626Z",
+      "milestone": "m3",
+      "kind": "todo",
+      "note": "todo #7 done: Apply the deployment on the VPS (human action: the commands are in deploy/README.md and CHECKS.md)"
     }
   ],
   "prior_factor": 1.0
