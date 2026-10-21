@@ -8,7 +8,7 @@ Last update: 2026-10-21.
   model, the paste parser, the store, the versioned persistence layer, the
   JSON and CSV interchange, the renderer, the drag state machine, the
   keyboard flow and the application controller.
-* **The specs**: 127 tests pass with the test runner of Node
+* **The specs**: 129 tests pass with the test runner of Node
   (`npm run check` runs the syntax check and the tests). They cover the
   parser, the store, the persistence layer, the interchange formats, the
   renderer, the drag, the keyboard, the controller and the pages.
@@ -37,8 +37,10 @@ Last update: 2026-10-21.
 ## What is untested or unverified
 
 * **The site is not live yet.** The agent cannot reach the VPS: `ssh`,
-  `scp` and `sudo` are blocked by the guardrails, and the approval
-  (`mox vps allow eisenhower-matrix`) is a one-time human action. The exact
+  `scp` and `sudo` are blocked by the guardrails, and the remote work is
+  executed by the owner. The approval of the project was taken
+  (`mox vps allow eisenhower-matrix`), but the guardrails still refuse the
+  direct access, so the deployment itself is a human step. The exact
   commands are in `deploy/README.md` and in `CHECKS.md`.
 * **The extension was not loaded in Firefox.** The pages were checked in a
   headless browser (Chrome), not in Firefox, and the manifest was not

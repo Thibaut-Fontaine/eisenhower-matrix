@@ -19,10 +19,26 @@ set -euo pipefail
 SITE_DIR=/srv/eisenhower-matrix-web
 UNIT=/etc/systemd/system/eisenhower-matrix-web.service
 STAGE=${STAGE_DIR:-/tmp/eisenhower-matrix-web}
-NGINX_SITE=${NGINX_SITE:-/etc/nginx/sites-available/thibautfontaine.space}
-NGINX_LINK=${NGINX_LINK:-/etc/nginx/sites-enabled/thibautfontaine.space}
+NGINX_SITE=${NGINX_SITE:-}
 
 log() { printf '[eisenhower-matrix] %s\n' "$*"; }
+
+# Find the nginx file that serves thibautfontaine.space.
+find_nginx_site() {
+  if [ -n "$NGINX_SITE" ]; then
+    printf '%s' "$NGINX_SITE"
+    return 0
+  fi
+  local candidate
+  for candidate in /etc/nginx/sites-enabled/* /etc/nginx/conf.d/*; do
+    [ -f "$candidate" ] || continue
+    if sudo grep -qs "thibautfontaine\.space" "$candidate"; then
+      printf '%s' "$candidate"
+      return 0
+    fi
+  done
+  return 1
+}
 
 if [ ! -d "$STAGE" ]; then
   log "the staged files are missing: $STAGE"
@@ -50,6 +66,12 @@ log "the service listens on 127.0.0.1:8792"
 curl -fsS http://127.0.0.1:8792/index.html > /dev/null
 
 log "adding the nginx location"
+NGINX_SITE=$(find_nginx_site) || {
+  log "no nginx file for thibautfontaine.space was found"
+  log "set NGINX_SITE=/path/to/the/site.conf and run the script again"
+  exit 1
+}
+log "the nginx site is $NGINX_SITE"
 if ! sudo grep -q "location /eisenhower/" "$NGINX_SITE"; then
   sudo cp -a "$NGINX_SITE" "$NGINX_SITE.bak-$(date -u +%Y%m%dT%H%M%SZ)"
   sudo tee -a "$NGINX_SITE" < "$(dirname "$0")/nginx-eisenhower.conf" > /dev/null
