@@ -1,0 +1,30 @@
+[Unit]
+Description=Eisenhower Matrix web app (static files)
+Documentation=https://github.com/Thibaut-Fontaine/eisenhower-matrix
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/eisenhower-matrix-web
+ExecStart=/usr/bin/python3 -m http.server 8792 --bind 127.0.0.1 --directory /srv/eisenhower-matrix-web
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONDONTWRITEBYTECODE=1
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
