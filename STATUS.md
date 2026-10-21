@@ -36,12 +36,11 @@ Last update: 2026-10-21.
 
 ## What is untested or unverified
 
-* **The site is not live yet.** The agent cannot reach the VPS: `ssh`,
-  `scp` and `sudo` are blocked by the guardrails, and the remote work is
-  executed by the owner. The approval of the project was taken
-  (`mox vps allow eisenhower-matrix`), but the guardrails still refuse the
-  direct access, so the deployment itself is a human step. The exact
-  commands are in `deploy/README.md` and in `CHECKS.md`.
+* **The site is live** at <https://thibautfontaine.space/eisenhower/> since
+  2026-10-21. `eisenhower-matrix-web.service` is active on `127.0.0.1:8792`;
+  the nginx location uses `^~ /eisenhower/` so the existing asset regex does
+  not intercept `app.css` or `core/*.js`. `nginx -t` passed and the page,
+  stylesheet and core scripts return 200.
 * **The extension was not loaded in Firefox.** The pages were checked in a
   headless browser (Chrome), not in Firefox, and the manifest was not
   validated by `web-ext`. Firefox still has to be checked by hand.
@@ -54,9 +53,8 @@ Last update: 2026-10-21.
 
 ## The three next steps
 
-1. **Deploy the site.** Copy the web files to the server and run
-   `deploy/deploy.sh` (the exact commands are in `deploy/README.md` and in
-   `CHECKS.md`), then check `https://thibautfontaine.space/eisenhower/`.
+1. **Open the live site** at <https://thibautfontaine.space/eisenhower/> and
+   add, move, export and import a few tasks; then reload to confirm localStorage.
 2. **Check the extension in Firefox**: load the unpacked extension, open the
    popup and the full matrix, and add, move, complete and delete a task.
 3. **Decide about the subdomain**: create the DNS record for

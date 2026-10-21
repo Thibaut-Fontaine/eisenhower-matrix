@@ -29,7 +29,7 @@ Rules:
 
 ## Open items
 
-- [ ] Deploy the web app on the VPS | due: +2h | kind: deploy | priority: high | detail: copy the web files and run deploy/deploy.sh on the server, then check https://thibautfontaine.space/eisenhower/ | probe: http 200 https://thibautfontaine.space/eisenhower/
+- [x] Deploy the web app on the VPS | due: +2h | kind: deploy | priority: high | detail: copy the web files and run deploy/deploy.sh on the server, then check https://thibautfontaine.space/eisenhower/ | probe: http 200 https://thibautfontaine.space/eisenhower/
 - [ ] Check the extension in Firefox | due: +4h | kind: manual | priority: high | detail: load the unpacked extension from about:debugging, open the popup and the full matrix, and add, move and delete a task | probe: systemctl is-active eisenhower-matrix-web
 - [ ] Confirm the data stays in the browser | due: +1d | kind: manual | priority: normal | detail: add a task, reload the page, export the JSON and check that the file holds the task and that no request leaves the browser | probe: systemctl is-active eisenhower-matrix-web
 - [ ] Decide about the eisenhower subdomain | due: +1w | kind: manual | priority: low | detail: the subdomain does not resolve, the site is served under /eisenhower; create the DNS record and a certificate if a subdomain is wanted | probe: http 200 https://thibautfontaine.space/eisenhower/
