@@ -7,7 +7,6 @@ agent cannot: a VPS service or cron, an API key/quota, a deploy, a data sample.
 Format — one check per line, only the title is required:
 
 ```text
-- [ ] Short imperative title | due: +2h | kind: vps | priority: high | detail: what to look at | every: 1d | probe: systemctl is-active fetcher
 ```
 
 * `due`: `+30m`, `+2h`, `+3d`, `+1w`, `now`, or an RFC3339 timestamp. Omit for
