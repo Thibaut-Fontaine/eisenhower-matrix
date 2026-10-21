@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "slug": "eisenhower-matrix",
+  "generated_at": "2026-10-21T11:19:00.703885850Z",
+  "milestones": [
+    {
+      "id": "m1",
+      "title": "Foundation and failing tests",
+      "description": "Set up the project skeleton and write the first failing tests.",
+      "todos": [
+        {
+          "text": "Write failing unit tests for the core behaviour",
+          "done": false
+        },
+        {
+          "text": "Set up the project structure and dependencies",
+          "done": false
+        },
+        {
+          "text": "Write failing node:test specs: paste parser, task store, persistence",
+          "done": false
+        },
+        {
+          "text": "Create shared core folder layout, task model skeleton, package.json test script",
+          "done": false
+        },
+        {
+          "text": "Confirm no runtime dependency and no build step",
+          "done": false
+        }
+      ],
+      "complexity": "medium",
+      "algorithmic_complexity": "",
+      "estimate_secs": 1800,
+      "status": "in-progress",
+      "started_at": "2026-10-21T11:33:58.677166369Z",
+      "actual_secs": 0,
+      "note": ""
+    },
+    {
+      "id": "m2",
+      "title": "Implement the core",
+      "description": "Make the tests pass with the simplest correct implementation.",
+      "todos": [
+        {
+          "text": "Implement the core behaviour",
+          "done": false
+        },
+        {
+          "text": "Handle errors and edge cases",
+          "done": false
+        },
+        {
+          "text": "Write/adjust unit tests for the behaviour",
+          "done": false
+        },
+        {
+          "text": "Implement paste parser with per-line quadrant preview",
+          "done": false
+        },
+        {
+          "text": "Implement task store: add, edit, delete, move, reorder, complete",
+          "done": false
+        },
+        {
+          "text": "Implement versioned persistence + one-time legacy migration with fail-safe",
+          "done": false
+        },
+        {
+          "text": "Implement JSON and CSV import/export with round-trip test",
+          "done": false
+        }
+      ],
+      "complexity": "high",
+      "algorithmic_complexity": "",
+      "estimate_secs": 3600,
+      "status": "pending",
+      "actual_secs": 0,
+      "note": ""
+    },
+    {
+      "id": "m3",
+      "title": "Validate, document and ship",
+      "description": "Run the full suite, document usage, and push a clean tree.",
+      "todos": [
+        {
+          "text": "Run the full test suite, formatter and linter",
+          "done": false
+        },
+        {
+          "text": "Write README usage notes",
+          "done": false
+        },
+        {
+          "text": "Commit everything and push",
+          "done": false
+        },
+        {
+          "text": "Build responsive 2x2 grid UI, drag-and-drop, keyboard path, no innerHTML",
+          "done": false
+        },
+        {
+          "text": "Build standalone web app and bring the extension to parity",
+          "done": false
+        },
+        {
+          "text": "Deploy to VPS behind nginx and finish README/STATUS/CHECKS",
+          "done": false
+        }
+      ],
+      "complexity": "low",
+      "algorithmic_complexity": "",
+      "estimate_secs": 1200,
+      "status": "pending",
+      "actual_secs": 0,
+      "note": ""
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-21T11:33:58.677166369Z",
+      "milestone": "m1",
+      "kind": "started",
+      "note": ""
+    },
+    {
+      "at": "2026-10-21T11:34:05.485355492Z",
+      "milestone": "m1",
+      "kind": "todo-added",
+      "note": "Write failing node:test specs: paste parser, task store, persistence"
+    },
+    {
+      "at": "2026-10-21T11:34:05.489916230Z",
+      "milestone": "m1",
+      "kind": "todo-added",
+      "note": "Create shared core folder layout, task model skeleton, package.json test script"
+    },
+    {
+      "at": "2026-10-21T11:34:05.499107568Z",
+      "milestone": "m1",
+      "kind": "todo-added",
+      "note": "Confirm no runtime dependency and no build step"
+    },
+    {
+      "at": "2026-10-21T11:34:05.503011634Z",
+      "milestone": "m2",
+      "kind": "todo-added",
+      "note": "Implement paste parser with per-line quadrant preview"
+    },
+    {
+      "at": "2026-10-21T11:34:05.506621848Z",
+      "milestone": "m2",
+      "kind": "todo-added",
+      "note": "Implement task store: add, edit, delete, move, reorder, complete"
+    },
+    {
+      "at": "2026-10-21T11:34:05.511303213Z",
+      "milestone": "m2",
+      "kind": "todo-added",
+      "note": "Implement versioned persistence + one-time legacy migration with fail-safe"
+    },
+    {
+      "at": "2026-10-21T11:34:05.514324873Z",
+      "milestone": "m2",
+      "kind": "todo-added",
+      "note": "Implement JSON and CSV import/export with round-trip test"
+    },
+    {
+      "at": "2026-10-21T11:34:05.518265368Z",
+      "milestone": "m3",
+      "kind": "todo-added",
+      "note": "Build responsive 2x2 grid UI, drag-and-drop, keyboard path, no innerHTML"
+    },
+    {
+      "at": "2026-10-21T11:34:05.524015097Z",
+      "milestone": "m3",
+      "kind": "todo-added",
+      "note": "Build standalone web app and bring the extension to parity"
+    },
+    {
+      "at": "2026-10-21T11:34:05.528692334Z",
+      "milestone": "m3",
+      "kind": "todo-added",
+      "note": "Deploy to VPS behind nginx and finish README/STATUS/CHECKS"
+    }
+  ],
+  "prior_factor": 1.0
+}

@@ -1,0 +1,64 @@
+# Build output and caches (kept outside the repo when possible)
+target/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.benchmarks/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.turbo/
+.parcel-cache/
+coverage/
+htmlcov/
+.gradle/
+.terraform/
+
+# Local state
+.mox/
+RECOVERY.md
+.env
+.env.*
+*.local
+*.log
+*.tmp
+*.pid
+
+# Secrets and keys
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials*
+*.secret
+
+# Large files: never commit datasets, archives, media or binaries
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.iso
+*.bin
+*.db
+*.sqlite
+*.sqlite3
+*.parquet
+*.csv.gz
+*.mp4
+*.mov
+*.mkv
+*.onnx
+*.pt
+*.safetensors
+
+# OS noise
+.DS_Store
+Thumbs.db

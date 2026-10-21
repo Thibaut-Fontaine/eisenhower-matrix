@@ -1,0 +1,17 @@
+{
+  "name": "eisenhower-matrix",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Eisenhower matrix task manager: a Firefox extension and a standalone static web app sharing one dependency-free core.",
+  "type": "commonjs",
+  "license": "MIT",
+  "main": "core/index.js",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "lint": "for f in core/*.js test/*.mjs test/helpers/*.mjs *.js; do node --check \"$f\" || exit 1; done",
+    "check": "npm run lint && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

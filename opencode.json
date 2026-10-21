@@ -1,0 +1,73 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "*": "allow",
+      "crontab *": "deny",
+      "gh api*": "deny",
+      "gh auth*": "deny",
+      "gh repo archive*": "deny",
+      "gh repo create*": "deny",
+      "gh repo delete*": "deny",
+      "gh repo edit*": "deny",
+      "gh repo list*": "deny",
+      "gh repo rename*": "deny",
+      "gh repo transfer*": "deny",
+      "gh search*": "deny",
+      "gh secret*": "deny",
+      "gh variable*": "deny",
+      "gh workflow*": "deny",
+      "git clone*": "deny",
+      "git config --global*": "deny",
+      "git config --system*": "deny",
+      "git filter-branch*": "deny",
+      "git filter-repo*": "deny",
+      "git push --force*": "deny",
+      "git push --mirror*": "deny",
+      "git push -f*": "deny",
+      "git remote add*": "deny",
+      "git remote remove*": "deny",
+      "git remote set-url*": "deny",
+      "kill *": "deny",
+      "killall *": "deny",
+      "pkill *": "deny",
+      "rm -rf $HOME*": "deny",
+      "rm -rf ..*": "deny",
+      "rm -rf /*": "deny",
+      "rm -rf ~*": "deny",
+      "rsync *": "deny",
+      "scp *": "deny",
+      "service *": "deny",
+      "sftp *": "deny",
+      "ssh *": "deny",
+      "sudo *": "deny",
+      "systemctl *": "deny"
+    },
+    "edit": {
+      "*": "allow"
+    },
+    "external_directory": {
+      "*": "deny",
+      "/home/thibaut/mox-projects/eisenhower-matrix/**": "allow"
+    },
+    "question": "deny",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_ed25519*": "deny",
+      "*id_rsa*": "deny",
+      "~/.aws/**": "deny",
+      "~/.config/gh/**": "deny",
+      "~/.config/opencode/**": "deny",
+      "~/.ssh/**": "deny"
+    },
+    "task": "allow",
+    "todowrite": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  }
+}
