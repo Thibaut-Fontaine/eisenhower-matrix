@@ -135,3 +135,43 @@ test('the compact view lists the tasks of every quadrant', () => {
   assert.ok(item.querySelector('.move-select'));
   assert.ok(item.querySelector('.task-action[data-action="delete"]'));
 });
+
+test('the paste panel previews the lines and adds them with their quadrant', () => {
+  const { doc, app } = setup();
+  const panel = app.view.root.parentNode.querySelector('.paste-panel');
+  const textarea = panel.querySelector('.paste-text');
+  textarea.value = '- buy milk\n- [x] call the bank\n- walk the dog';
+
+  panel.querySelector('[data-action="paste-preview"]').click();
+  const rows = panel.querySelectorAll('.paste-item');
+  assert.equal(rows.length, 3);
+  assert.equal(rows[0].querySelector('.paste-text').textContent, 'buy milk');
+  assert.equal(rows[0].querySelector('.paste-quadrant').value, 'not-important-not-urgent');
+  assert.equal(rows[1].querySelector('.paste-text').textContent, 'call the bank');
+
+  // The second line goes to another quadrant.
+  const select = rows[1].querySelector('.paste-quadrant');
+  select.value = 'important-urgent';
+
+  panel.querySelector('[data-action="paste-add"]').click();
+  assert.equal(app.store.all().length, 3);
+  // The store groups the tasks by quadrant.
+  assert.deepEqual(app.store.all().map((task) => task.text), ['call the bank', 'buy milk', 'walk the dog']);
+  const bank = app.store.all()[0];
+  assert.equal(bank.quadrant, 'important-urgent');
+  assert.equal(bank.completed, true, 'a ticked box marks the task as done');
+  assert.equal(app.store.all()[1].quadrant, 'not-important-not-urgent');
+  assert.equal(app.store.all()[2].quadrant, 'not-important-not-urgent');
+  assert.equal(panel.hidden, true, 'the panel closes after the tasks are added');
+});
+
+test('the paste panel opens and closes', () => {
+  const { app } = setup();
+  const panel = app.view.root.parentNode.querySelector('.paste-panel');
+  const button = app.view.root.parentNode.querySelector('[data-action="toggle-paste"]');
+  assert.equal(panel.hidden, true);
+  button.click();
+  assert.equal(panel.hidden, false);
+  button.click();
+  assert.equal(panel.hidden, true);
+});

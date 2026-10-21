@@ -93,6 +93,22 @@
         check('the parser strips the markers', parsed.length === 3 && parsed[0].text === 'one' && parsed[0].completed === true);
 
         check('no markup is inserted', document.querySelectorAll('.task-text img').length === 0);
+
+        // The compact view of the extension popup.
+        var popupMount = document.createElement('div');
+        document.body.appendChild(popupMount);
+        var popup = Eisenhower.app.createApp({
+          document: document,
+          storage: memoryStorage(),
+          mount: popupMount,
+          options: { compact: true, defaultQuadrant: 'not-important-not-urgent' }
+        });
+        popup.addTask('buy milk', 'important-urgent');
+        check('the popup lists the tasks', popupMount.querySelectorAll('.compact-task').length === 1);
+        check('the popup offers a move selector', popupMount.querySelector('.move-select') !== null);
+        check('the popup offers the delete action', popupMount.querySelector('.task-action[data-action="delete"]') !== null);
+        check('the popup offers the add form', popupMount.querySelector('.add-form') !== null);
+        check('the popup opens the full matrix', popupMount.querySelector('.open-full') !== null);
       } catch (error) {
         lines.push('FAIL exception: ' + (error && error.message ? error.message : String(error)));
       }

@@ -176,6 +176,13 @@ class Element {
 
   set value(next) {
     this._value = next === null || next === undefined ? '' : String(next);
+    if (this.tagName === 'SELECT') {
+      // A select holds the value of its selected option.
+      for (const option of this.querySelectorAll('option')) {
+        if (option.getAttribute('value') === this._value) option.setAttribute('selected', 'selected');
+        else option.removeAttribute('selected');
+      }
+    }
   }
 
   set id(value) {
